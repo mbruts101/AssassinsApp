@@ -48,10 +48,8 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        setHasOptionsMenu(true);
-
-        mGoogleApiClient = new GoogleApiClient.Builder( getActivity() )
+                setHasOptionsMenu(true);
+                mGoogleApiClient = new GoogleApiClient.Builder( getActivity())
                 .addConnectionCallbacks( this )
                 .addOnConnectionFailedListener( this )
                 .addApi( LocationServices.API )
