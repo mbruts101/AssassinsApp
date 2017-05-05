@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MapsDemo</string>
+    <string name="aboutText">Assassins Mobile is a game created by Michael Brutsch, Abby Atchison, Jerry Martin, and Daniel Cole. It was inspired by the real life version of Assassins. The goal of the game is to eliminate the other players involved. You will have a target and once you are a certain radius of your target you may fire upon them. Becareful not to be eliminated yourself, good luck!</string>
 </resources>
