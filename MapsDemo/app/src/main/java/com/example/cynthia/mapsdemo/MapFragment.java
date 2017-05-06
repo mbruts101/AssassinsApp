@@ -2,6 +2,7 @@ package com.example.cynthia.mapsdemo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -17,9 +18,13 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
 
 /**
  * Created by Cynthia on 4/15/2017.
@@ -36,6 +41,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    private Location targetLocation = new Location("");
     private LocationRequest mLocationRequest;
 
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
@@ -116,6 +122,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                     .setFastestInterval(FASTEST_INTERVAL);
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
+        getMap().addMarker(new MarkerOptions()
+                .position(new LatLng(10, 10))
+                .title("Hello world"));
         while (mCurrentLocation == null){
 
         }
@@ -125,6 +134,17 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
         Toast.makeText(getActivity(), location.toString() + "", Toast.LENGTH_SHORT).show();
+        targetLocation.setLatitude(0.0d);
+        targetLocation.setLongitude(0.0d);
+
+        /*LatLng latLng = new LatLng (mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        MarkerOptions options = new MarkerOptions().position( latLng );
+        options.title( getAddressFromLatLng( latLng ) );
+
+        options.icon( BitmapDescriptorFactory.defaultMarker() );
+        getMap().addMarker( options );*/
+
+
     }
 
     @Override
@@ -150,6 +170,19 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public void onMapLongClick(LatLng latLng) {
 
+    }
+    private String getAddressFromLatLng( LatLng latLng ) {
+        Geocoder geocoder = new Geocoder( getActivity() );
+
+        String address = "";
+        try {
+            address = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getAddressLine( 0 );
+        } catch (IOException e ) {
+        }
+
+        return address;
     }
 
     @Override
