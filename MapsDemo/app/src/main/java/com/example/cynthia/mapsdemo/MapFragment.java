@@ -51,6 +51,8 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
             GoogleMap.MAP_TYPE_NONE };
     private int curMapTypeIndex = 0;
 
+    Marker m;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -114,20 +116,20 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_FINE_LOCATION);
         }
-        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
-        if (mCurrentLocation == null){
-            mLocationRequest = LocationRequest.create()
-                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(UPDATE_INTERVAL)
-                    .setFastestInterval(FASTEST_INTERVAL);
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }
-        getMap().addMarker(new MarkerOptions()
-                .position(new LatLng(10, 10))
-                .title("Hello world"));
-        while (mCurrentLocation == null){
+        MarkerOptions tMarker = new MarkerOptions()//this is the marker object, don't lose it
+                .position(new LatLng(0, 0))
+                .title("Target");
+        m = getMap().addMarker(tMarker);
 
-        }
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL)
+                .setFastestInterval(FASTEST_INTERVAL);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+
+        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
+
         initCamera( mCurrentLocation );
     }
     @Override
@@ -137,12 +139,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         targetLocation.setLatitude(0.0d);
         targetLocation.setLongitude(0.0d);
 
-        /*LatLng latLng = new LatLng (mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        MarkerOptions options = new MarkerOptions().position( latLng );
-        options.title( getAddressFromLatLng( latLng ) );
+        LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
 
-        options.icon( BitmapDescriptorFactory.defaultMarker() );
-        getMap().addMarker( options );*/
+        m.setPosition(latLng);
 
 
     }

@@ -9,5 +9,14 @@
         android:name="com.example.cynthia.mapsdemo.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Strike"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="56dp"
+        android:id="@+id/killButton"
+        android:visibility="invisible"/>
 
 </RelativeLayout>
