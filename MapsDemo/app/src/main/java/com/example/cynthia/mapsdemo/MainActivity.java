@@ -2,10 +2,11 @@ package com.example.cynthia.mapsdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public Button strikeButt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +18,12 @@ public class MainActivity extends AppCompatActivity {
         strikeButt = (Button) findViewById(R.id.killButton);
         Toast.makeText(this,response, Toast.LENGTH_LONG).show();
 
+    }
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == R.id.killButton){
+
+            }
     }
 }

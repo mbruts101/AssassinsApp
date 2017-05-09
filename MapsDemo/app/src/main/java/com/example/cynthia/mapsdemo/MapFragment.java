@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -142,7 +143,15 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
 
         m.setPosition(latLng);
-
+        double distance = mCurrentLocation.distanceTo(targetLocation);
+        if (distance <= 100){
+            Button strikeButt = (Button) getActivity().findViewById(R.id.killButton);
+            strikeButt.setVisibility(View.VISIBLE);
+        }
+        else{
+            Button strikeButt = (Button) getActivity().findViewById(R.id.killButton);
+            strikeButt.setVisibility(View.VISIBLE);
+        }
 
     }
 
