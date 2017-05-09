@@ -1,78 +1,119 @@
 package com.example.cynthia.mapsdemo;
 
 import android.os.AsyncTask;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
-/**
- * Created by User on 4/30/2017.
- */
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-public class Client extends AsyncTask<Object, Object, String> {
-    String dstAddress;
-    int dstPort;
-    String response = "";
+public class Client extends AsyncTask<String, String, String>
+{
 
-    Client(String addr, int port, String r) {
-        dstAddress = addr;
-        dstPort = port;
-        response = r;
+    String IPAddress;
+    int portNum;
+    Button sendInput;
+    MainActivity activity;
+    String outputTxt;
+
+    boolean sendKill = false;
+
+    DataOutputStream serverOutput;
+
+    public Client(String IP, int port, MainActivity activity, Button btn)
+    {
+
+        IPAddress = IP;
+        portNum = port;
+        this.activity = activity;
+        sendInput = btn;
+
+
+
     }
 
-    @Override
-    protected String doInBackground(Object... arg0) {
+    protected String doInBackground(String... params)
+    {
+        runProgram();
+        return outputTxt;
+    }
 
-        Socket socket = null;
 
-        try {
-            socket = new Socket(dstAddress, dstPort);
+    public void runProgram()
+    {
+        try
+        {
 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
-                    1024);
-            byte[] buffer = new byte[1024];
+            String hostname = IPAddress;
+            int port = portNum;
 
-            int bytesRead;
-            InputStream inputStream = socket.getInputStream();
+            //InetAddress inetAddress = InetAddress.getByAddress(hostname.getBytes());
 
-			/*
-             * notice: inputStream.read() will block if no data return
-			 */
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
-                response += byteArrayOutputStream.toString("UTF-8");
-            }
+            outputTxt = "Connecting to server on port " + port;
 
-        } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            response = "UnknownHostException: " + e.toString();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            response = "IOException: " + e.toString();
-        } finally {
-            if (socket != null) {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+            changeText();
+
+            Socket connectionSock = new Socket(hostname, port);
+
+            serverOutput = new DataOutputStream(connectionSock.getOutputStream());
+
+            outputTxt = "Connection made.";
+
+            // Start a thread to listen and display data sent by the server
+            ClientListener listener = new ClientListener(connectionSock, activity, outputTxt);
+            Thread theThread = new Thread(listener);
+            theThread.start();
+
+            serverOutput.writeBytes("Hello World");
+            serverOutput.writeBytes("whats up \n");
+
+            changeText();
+
+            sendInput.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /// send message to server that this user made a kill
+                    sendKill = true;
+
                 }
+            });
+
+            while(true)
+            {
+                if(sendKill)
+                {
+                    try{
+                        serverOutput.writeBytes("KILL \n");
+                    }catch (IOException e)
+                    {
+                        outputTxt = e.getMessage();
+                        changeText();
+                    }
+                    sendKill = false;
+                }
+
+
             }
+
         }
-        return response;
+        catch (IOException e)
+        {
+            outputTxt = e.getMessage();
+            changeText();
+        }
     }
 
-    @Override
-    protected void onPostExecute(String result) {
-        System.out.println("GIVEN RESPONSE " + response);
-        super.onPostExecute(result);
+    private void changeText()
+    {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activity,outputTxt,Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
 
 }
 

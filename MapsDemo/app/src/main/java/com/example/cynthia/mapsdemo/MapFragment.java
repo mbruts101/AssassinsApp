@@ -136,7 +136,6 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
-        Toast.makeText(getActivity(), location.toString() + "", Toast.LENGTH_SHORT).show();
         targetLocation.setLatitude(0.0d);
         targetLocation.setLongitude(0.0d);
 

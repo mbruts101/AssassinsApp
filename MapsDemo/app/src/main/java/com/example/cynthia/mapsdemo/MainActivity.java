@@ -13,10 +13,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         String response = " ";
         setContentView(R.layout.activity_main);
-        Client myClient = new Client("10.0.2.15", 8080, response);
-        myClient.execute();
         strikeButt = (Button) findViewById(R.id.killButton);
-        Toast.makeText(this,response, Toast.LENGTH_LONG).show();
+
+        Client myClient = new Client("172.90.101.88", 8080,MainActivity.this, strikeButt);
+        myClient.execute();
 
     }
 
