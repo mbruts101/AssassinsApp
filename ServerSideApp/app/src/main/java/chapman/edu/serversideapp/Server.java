@@ -22,20 +22,23 @@ import java.util.Enumeration;
 public class Server extends AsyncTask<String, String, String>
 {
     // Maintain list of all client sockets for broadcast and the game board
-    private ArrayList<Socket> socketList;
-    private GameBoard game;
+    private ArrayList<Player> playerList;
+    private Game game;
     String IPAddress;
     int port;
+
 
     MainActivity activity;
     TextView textView;
 
     String message = "";
+    Game g;
 
     public Server(MainActivity activity, TextView tv)
     {
-        socketList = new ArrayList<Socket>();
-        game = new GameBoard(); //initializes the game board
+        playerList = new ArrayList<Player>();
+        game = new Game();
+
         IPAddress = getIpAddress();
         port = 8080;
         this.activity = activity;
@@ -61,10 +64,11 @@ public class Server extends AsyncTask<String, String, String>
             while (true)
             {
                 Socket connectionSock = serverSock.accept();
+                Player connectionPlayer = new Player(connectionSock);
                 // Add this socket to the list
-                socketList.add(connectionSock);
+                playerList.add(connectionPlayer);
                 // Send to ClientHandler the socket and arraylist of all sockets and the board
-                ClientHandler handler = new ClientHandler(connectionSock, this.socketList, this.game, activity, message, textView);
+                ClientHandler handler = new ClientHandler(connectionSock, this.playerList, game, activity, message, textView, connectionPlayer);
                 Thread theThread = new Thread(handler);
                 theThread.start();
             }

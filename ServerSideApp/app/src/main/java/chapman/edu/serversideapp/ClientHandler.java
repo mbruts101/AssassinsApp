@@ -10,27 +10,32 @@ import java.io.DataOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ClientHandler implements Runnable
 {
     private Socket connectionSock = null;
-    private ArrayList<Socket> socketList;
-    private GameBoard gameState;
+    private Player connectionPlayer = null;
+    private ArrayList<Player> playerList;
+    private Game gameState;
 
     MainActivity activity;
     String message;
     TextView textView;
 
-    ClientHandler(Socket sock, ArrayList<Socket> socketList, GameBoard gameState, MainActivity activity, String msg, TextView tv)
+    ClientHandler(Socket sock, ArrayList<Player> List, Game gameState, MainActivity activity, String msg, TextView tv, Player player)
     {
         this.connectionSock = sock;
-        this.socketList = socketList;	// Keep reference to master list
+        this.connectionPlayer = player;
+        this.playerList = List;	// Keep reference to master list
         this.gameState = gameState;
         this.activity = activity;
         message = msg;
         textView = tv;
+
+        gameState.assignTargets();
     }
 
     public void run()
@@ -43,6 +48,7 @@ public class ClientHandler implements Runnable
                     new InputStreamReader(connectionSock.getInputStream()));
             
             changeText();
+
             while (true)
             {
 
@@ -54,11 +60,21 @@ public class ClientHandler implements Runnable
 
                     changeText();
 
-                    // Turn around and output this data
-                    for (Socket s : socketList)
+                    if(clientText.contains("KILL"))
                     {
-                        DataOutputStream clientOutput = new DataOutputStream(s.getOutputStream());
-                        clientOutput.writeBytes(clientText + "\n");
+                        gameState.removePlayer(connectionPlayer.getTarget(),connectionPlayer);
+
+
+                        //notify player eliminated that they suck
+
+                        DataOutputStream eliminatedPlayerStream = new DataOutputStream(connectionPlayer.getTarget().getmSocket().getOutputStream());
+                        eliminatedPlayerStream.writeBytes("You are *clap clap* cut off aka eliminated \n");
+                    }
+                    else if(clientText.contains("Location"))
+                    {
+                        //location update
+                        DataOutputStream outputStream = new DataOutputStream(connectionPlayer.getTarget().getmSocket().getOutputStream());
+                        outputStream.writeBytes(clientText + "\n");
                     }
                 }
                 else
@@ -66,7 +82,7 @@ public class ClientHandler implements Runnable
                     // Connection was lost
                     System.out.println("Closing connection for socket " + connectionSock);
                     // Remove from arraylist
-                    socketList.remove(connectionSock);
+                    playerList.remove(connectionSock);
                     connectionSock.close();
                     break;
                 }
@@ -76,7 +92,7 @@ public class ClientHandler implements Runnable
         {
             System.out.println("Error: " + e.toString());
             // Remove from arraylist
-            socketList.remove(connectionSock);
+            playerList.remove(connectionSock);
         }
     }
 
