@@ -1,8 +1,5 @@
 package chapman.edu.serversideapp;
 
-import android.support.v7.app.AppCompatActivity;
-
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.widget.TextView;
@@ -18,13 +15,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         infoip = (TextView) findViewById(R.id.infoip);
         msg = (TextView) findViewById(R.id.msg);
-        server = new Server(this);
-        infoip.setText(server.getIpAddress() + ":" + server.getPort());
+        server = new Server(this, msg);
+        server.execute();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        server.onDestroy();
     }
 }

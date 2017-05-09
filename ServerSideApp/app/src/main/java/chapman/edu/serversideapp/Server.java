@@ -3,127 +3,79 @@ package chapman.edu.serversideapp;
 /**
  * Created by abigailatchison on 4/30/17.
  */
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import android.os.AsyncTask;
+import android.widget.TextView;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.io.DataOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
-public class Server {
+
+public class Server extends AsyncTask<String, String, String>
+{
+    // Maintain list of all client sockets for broadcast and the game board
+    private ArrayList<Socket> socketList;
+    private GameBoard game;
+    String IPAddress;
+    int port;
+
     MainActivity activity;
-    ServerSocket serverSocket;
+    TextView textView;
+
     String message = "";
-    static final int socketServerPORT = 8080;
 
-    public Server(MainActivity activity) {
+    public Server(MainActivity activity, TextView tv)
+    {
+        socketList = new ArrayList<Socket>();
+        game = new GameBoard(); //initializes the game board
+        IPAddress = getIpAddress();
+        port = 8080;
         this.activity = activity;
-        Thread socketServerThread = new Thread(new SocketServerThread());
-        socketServerThread.start();
+        textView = tv;
     }
 
-    public int getPort() {
-        return socketServerPORT;
+    protected String doInBackground(String... params)
+    {
+        getConnection();
+        return message;
     }
 
-    public void onDestroy() {
-        if (serverSocket != null) {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+    private void getConnection()
+    {
+        // Wait for a connection from the client
+        try
+        {
+            message += "Waiting for client connections on port " + port + " at IP " + IPAddress;
+            ServerSocket serverSock = new ServerSocket(port);
+            changeText();
+            // This is an infinite loop, the user will have to shut it down
+            // using control-c
+            while (true)
+            {
+                Socket connectionSock = serverSock.accept();
+                // Add this socket to the list
+                socketList.add(connectionSock);
+                // Send to ClientHandler the socket and arraylist of all sockets and the board
+                ClientHandler handler = new ClientHandler(connectionSock, this.socketList, this.game, activity, message, textView);
+                Thread theThread = new Thread(handler);
+                theThread.start();
             }
+            // Will never get here, but if the above loop is given
+            // an exit condition then we'll go ahead and close the socket
+            //serverSock.close();
         }
-    }
-
-    private class SocketServerThread extends Thread {
-
-        int count = 0;
-
-        @Override
-        public void run() {
-            try {
-                // create ServerSocket using specified port
-                serverSocket = new ServerSocket(socketServerPORT);
-
-                while (true) {
-                    // block the call until connection is created and return
-                    // Socket object
-                    Socket socket = serverSocket.accept();
-                    count++;
-                    message += "#" + count + " from "
-                            + socket.getInetAddress() + ":"
-                            + socket.getPort() + "\n";
-
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.msg.setText(message);
-                        }
-                    });
-
-                    SocketServerReplyThread socketServerReplyThread =
-                            new SocketServerReplyThread(socket, count);
-                    socketServerReplyThread.run();
-
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
         }
-    }
-
-    private class SocketServerReplyThread extends Thread {
-
-        private Socket hostThreadSocket;
-        int cnt;
-
-        SocketServerReplyThread(Socket socket, int c) {
-            hostThreadSocket = socket;
-            cnt = c;
-        }
-
-        @Override
-        public void run() {
-            OutputStream outputStream;
-            String msgReply = "Hello from Server, you are #" + cnt;
-
-            try {
-                outputStream = hostThreadSocket.getOutputStream();
-                PrintStream printStream = new PrintStream(outputStream);
-                printStream.print(msgReply);
-                printStream.close();
-
-                message += "replayed: " + msgReply + "\n";
-
-                activity.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        activity.msg.setText(message);
-                    }
-                });
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                message += "Something wrong! " + e.toString() + "\n";
-            }
-
-            activity.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    activity.msg.setText(message);
-                }
-            });
-        }
-
     }
 
     public String getIpAddress() {
@@ -154,5 +106,14 @@ public class Server {
         }
         return ip;
     }
-}
 
+    private void changeText()
+    {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textView.setText(message);
+            }
+        });
+    }
+}
