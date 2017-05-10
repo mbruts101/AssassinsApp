@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a064d5a-c298-4188-b690-673e06e4af3c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/Game.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/Location.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MapsDemo/.idea/gradle.xml" afterPath="$PROJECT_DIR$/MapsDemo/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MapsDemo/.idea/modules.xml" afterPath="$PROJECT_DIR$/MapsDemo/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/.idea/gradle.xml" afterPath="$PROJECT_DIR$/ServerSideApp/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/.idea/misc.xml" afterPath="$PROJECT_DIR$/ServerSideApp/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/ServerSideApp.iml" afterPath="$PROJECT_DIR$/ServerSideApp/ServerSideApp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/app/app.iml" afterPath="$PROJECT_DIR$/ServerSideApp/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/ClientHandler.java" afterPath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/ClientHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/Server.java" afterPath="$PROJECT_DIR$/ServerSideApp/app/src/main/java/chapman/edu/serversideapp/Server.java" />
     </list>
     <ignored path="AssassinsApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +44,7 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="false" />
+                <marker date="1494388582000" expanded="false" signature="46:198" ph="..." />
               </folding>
             </state>
           </provider>
@@ -64,11 +54,21 @@
         <entry file="file://$PROJECT_DIR$/MapsDemo/app/src/main/java/com/example/cynthia/mapsdemo/MapFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2295">
-              <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+              <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
-                <element signature="e#6696#6697#0" expanded="false" />
-                <element signature="e#6724#6725#0" expanded="false" />
+                <marker date="1494388582000" expanded="true" signature="2284:2669" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="2704:2911" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="2960:3390" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="6706:6712" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="6773:6781" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="6867:6875" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="6940:6948" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="7006:7014" ph="{...}" />
+                <marker date="1494388582000" expanded="true" signature="7142:7481" ph="{...}" />
+                <marker date="1494388582000" expanded="false" signature="7544:7555" ph=" { " />
+                <marker date="1494388582000" expanded="false" signature="7568:7574" ph=" }" />
+                <marker date="1494388582000" expanded="true" signature="7734:8123" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -78,11 +78,11 @@
         <entry file="file://$PROJECT_DIR$/MapsDemo/app/src/main/java/com/example/cynthia/mapsdemo/Client.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2668#2669#0" expanded="false" />
-                <element signature="e#2759#2760#0" expanded="false" />
+                <element signature="e#3237#3238#0" expanded="false" />
+                <element signature="e#3328#3329#0" expanded="false" />
+                <marker date="1494388582000" expanded="true" signature="46:237" ph="..." />
               </folding>
             </state>
           </provider>
@@ -273,7 +273,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="755" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="755" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -336,7 +336,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1494388582000" expanded="false" signature="46:198" ph="..." />
           </folding>
         </state>
       </provider>
@@ -347,8 +347,18 @@
           <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#6696#6697#0" expanded="false" />
-            <element signature="e#6724#6725#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="2284:2669" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2704:2911" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2960:3390" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6706:6712" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6773:6781" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6867:6875" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6940:6948" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7006:7014" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7142:7481" ph="{...}" />
+            <marker date="1494388582000" expanded="false" signature="7544:7555" ph=" { " />
+            <marker date="1494388582000" expanded="false" signature="7568:7574" ph=" }" />
+            <marker date="1494388582000" expanded="true" signature="7734:8123" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -358,9 +368,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#2759#2760#0" expanded="false" />
+            <element signature="e#3237#3238#0" expanded="false" />
+            <element signature="e#3328#3329#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="46:237" ph="..." />
           </folding>
         </state>
       </provider>
@@ -410,7 +420,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1494388582000" expanded="false" signature="46:198" ph="..." />
           </folding>
         </state>
       </provider>
@@ -421,8 +431,18 @@
           <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#6696#6697#0" expanded="false" />
-            <element signature="e#6724#6725#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="2284:2669" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2704:2911" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2960:3390" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6706:6712" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6773:6781" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6867:6875" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6940:6948" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7006:7014" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7142:7481" ph="{...}" />
+            <marker date="1494388582000" expanded="false" signature="7544:7555" ph=" { " />
+            <marker date="1494388582000" expanded="false" signature="7568:7574" ph=" }" />
+            <marker date="1494388582000" expanded="true" signature="7734:8123" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -432,9 +452,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#2759#2760#0" expanded="false" />
+            <element signature="e#3237#3238#0" expanded="false" />
+            <element signature="e#3328#3329#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="46:237" ph="..." />
           </folding>
         </state>
       </provider>
@@ -594,11 +614,21 @@
     <entry file="file://$PROJECT_DIR$/MapsDemo/app/src/main/java/com/example/cynthia/mapsdemo/MapFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2295">
-          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#6696#6697#0" expanded="false" />
-            <element signature="e#6724#6725#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="2284:2669" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2704:2911" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="2960:3390" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6706:6712" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6773:6781" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6867:6875" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="6940:6948" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7006:7014" ph="{...}" />
+            <marker date="1494388582000" expanded="true" signature="7142:7481" ph="{...}" />
+            <marker date="1494388582000" expanded="false" signature="7544:7555" ph=" { " />
+            <marker date="1494388582000" expanded="false" signature="7568:7574" ph=" }" />
+            <marker date="1494388582000" expanded="true" signature="7734:8123" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -608,7 +638,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1494388582000" expanded="false" signature="46:198" ph="..." />
           </folding>
         </state>
       </provider>
@@ -616,11 +646,11 @@
     <entry file="file://$PROJECT_DIR$/MapsDemo/app/src/main/java/com/example/cynthia/mapsdemo/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#2759#2760#0" expanded="false" />
+            <element signature="e#3237#3238#0" expanded="false" />
+            <element signature="e#3328#3329#0" expanded="false" />
+            <marker date="1494388582000" expanded="true" signature="46:237" ph="..." />
           </folding>
         </state>
       </provider>
