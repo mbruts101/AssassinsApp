@@ -43,6 +43,21 @@ public class ClientListener implements Runnable
                         connectionSock.close();
                         break;
                     }
+                    else if(serverText.contains("Location"))
+                    {
+                        String latlong = serverText.substring(serverText.indexOf(":")+1);
+                        String[] coordinates = latlong.split(",");
+                        if(coordinates.length == 2)
+                        {
+                            activity.causeTargetUpdate(Double.parseDouble(coordinates[0]),Double.parseDouble(coordinates[1]));
+                        }
+
+                    }
+                    else if(serverText.contains("eliminated"))
+                    {
+                        output = "Closing connection for socket " + connectionSock;
+                        connectionSock.close();
+                    }
                 }
                 else
                 {

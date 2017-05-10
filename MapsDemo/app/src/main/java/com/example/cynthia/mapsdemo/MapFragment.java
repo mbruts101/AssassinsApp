@@ -86,10 +86,10 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         getMap().animateCamera( CameraUpdateFactory
                 .newCameraPosition( position ), null );
 
-        getMap().setMapType( MAP_TYPES[curMapTypeIndex] );
-        getMap().setTrafficEnabled( true );
-        getMap().setMyLocationEnabled( true );
-        getMap().getUiSettings().setZoomControlsEnabled( true );
+        getMap().setMapType(MAP_TYPES[curMapTypeIndex]);
+        getMap().setTrafficEnabled(true);
+        getMap().setMyLocationEnabled(true);
+        getMap().getUiSettings().setZoomControlsEnabled(true);
     }
     @Override
     public void onStart() {
@@ -131,27 +131,60 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
 
-        initCamera( mCurrentLocation );
+        initCamera(mCurrentLocation);
     }
     @Override
     public void onLocationChanged(Location location) {
+        //Current location of Player
         mCurrentLocation = location;
-        targetLocation.setLatitude(0.0d);
-        targetLocation.setLongitude(0.0d);
 
-        LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        try{
+            ((onPlayerLocationChangedListener) getActivity()).sendPlayerLocation(location.getLatitude(),location.getLongitude());
+        }catch(ClassCastException cce){
 
+        }
+
+        //Set location of target
+        updateTargetLoc(0.0d, 0.0d);
+
+
+        //Update location of player
+        updatePlayerLoc(location.getLatitude(), location.getLongitude());
+
+        //Check distance to see if a kill is possible
+        updateIsStrikePossible();
+
+    }
+
+    public interface onPlayerLocationChangedListener{
+        public void sendPlayerLocation(double lat, double lon);
+    }
+
+    public void updateTargetLoc(double Latitude, double Longitude)
+    {
+        targetLocation.setLatitude(Latitude);
+        targetLocation.setLongitude(Longitude);
+    }
+
+    public void updatePlayerLoc(double Latitude, double Longitude)
+    {
+        LatLng latLng = new LatLng(Latitude,Longitude);
         m.setPosition(latLng);
+    }
+
+    public boolean updateIsStrikePossible()
+    {
         double distance = mCurrentLocation.distanceTo(targetLocation);
         if (distance <= 100){
             Button strikeButt = (Button) getActivity().findViewById(R.id.killButton);
             strikeButt.setVisibility(View.VISIBLE);
+            return true;
         }
         else{
             Button strikeButt = (Button) getActivity().findViewById(R.id.killButton);
             strikeButt.setVisibility(View.VISIBLE);
+            return false;
         }
-
     }
 
     @Override

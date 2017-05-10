@@ -21,6 +21,12 @@ public class Client extends AsyncTask<String, String, String>
 
     DataOutputStream serverOutput;
 
+
+    double playerLat;
+    double playerLon;
+    double targetLat;
+    double targetLon;
+
     public Client(String IP, int port, MainActivity activity, Button btn)
     {
 
@@ -29,7 +35,10 @@ public class Client extends AsyncTask<String, String, String>
         this.activity = activity;
         sendInput = btn;
 
-
+        playerLat = 0;
+        playerLon = 0;
+        targetLat = 0;
+        targetLon = 0;
 
     }
 
@@ -91,6 +100,13 @@ public class Client extends AsyncTask<String, String, String>
                         changeText();
                     }
                     sendKill = false;
+                }
+                else if(playerLat != activity.playerLat || playerLon != activity.playerLon)
+                {
+                    playerLat = activity.playerLat;
+                    playerLon = activity.playerLon;
+                    String locationUpdate = "Location: " + playerLat + "," + playerLon;
+                    serverOutput.writeBytes(locationUpdate + "\n");
                 }
 
 
